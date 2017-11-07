@@ -13,6 +13,8 @@ dependencyManagement {
 dependencies {
     compile project(":components:rest-support")
 
+
+
     compile "org.springframework.boot:spring-boot-starter-web"
 
     compile "com.zaxxer:HikariCP:2.3.7"
@@ -20,6 +22,7 @@ dependencies {
     compile "ch.qos.logback:logback-classic:1.1.11"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
 
     testCompile project(":components:test-support")
 }
