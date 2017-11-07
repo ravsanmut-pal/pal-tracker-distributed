@@ -22,18 +22,21 @@ public class ProjectClient {
         this.restOperations = restOperations;
         this.endpoint = registrationServerEndpoint;
 
-        ProjectInfo info1=new ProjectInfo(true);
-        projectsCache.put(new Long(3),info1);
 
     }
 
     @HystrixCommand(fallbackMethod = "getProjectFromCache")
     public ProjectInfo getProject(long projectId) {
-        return restOperations.getForObject(endpoint + "/projects/" + projectId, ProjectInfo.class);
+        ProjectInfo project = restOperations.getForObject(endpoint + "/projects/" + projectId, ProjectInfo.class);
+
+        projectsCache.put(projectId, project);
+
+        return project;
     }
 
     public ProjectInfo getProjectFromCache(long projectId) {
         logger.info("Getting project with id {} from cache", projectId);
         return projectsCache.get(projectId);
     }
+
 }
